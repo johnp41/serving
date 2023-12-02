@@ -236,6 +236,7 @@ func Main(opts ...Option) error {
 	adminHandler := adminHandler(d.Ctx, logger, drainer)
 
 	logger.Info("Edw 8a mporouse na einai o unikernel related http server")
+	logger.Info("Print to env REDIRECT_IP: " + env.RedirectIp)
 
 	// Enable TLS server when activator server certs are mounted.
 	// At this moment activator with TLS does not disable HTTP.
