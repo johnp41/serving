@@ -239,7 +239,7 @@ func makeQueueContainer(rev *v1.Revision, cfg *config.Config) (*corev1.Container
 			break
 		}
 	}
-	redirect_ip = fmt.Sprintf("%v", env_list)
+	//redirect_ip = fmt.Sprintf("%v", env_list)
 
 	var loggingLevel string
 	if ll, ok := cfg.Logging.LoggingLevel["queueproxy"]; ok {
