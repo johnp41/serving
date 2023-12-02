@@ -236,8 +236,9 @@ func Main(opts ...Option) error {
 	adminHandler := adminHandler(d.Ctx, logger, drainer)
 
 	logger.Info("Edw 8a mporouse na einai o unikernel related http server")
+	str_env := fmt.Sprintf("%v", env)
 	logger.Info("Print to env REDIRECT_IP: " + env.RedirectIp)
-
+	logger.Info("ENV is " + str_env)
 	// Enable TLS server when activator server certs are mounted.
 	// At this moment activator with TLS does not disable HTTP.
 	// See also https://github.com/knative/serving/issues/12808.
