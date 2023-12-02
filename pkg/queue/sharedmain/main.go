@@ -87,6 +87,7 @@ type config struct {
 	ServingReadinessProbe               string `split_words:"true"` // optional
 	EnableProfiling                     bool   `split_words:"true"` // optional
 	EnableHTTP2AutoDetection            bool   `split_words:"true"` // optional
+	RedirectIp                          string `split_words:"true" required:"true"`
 
 	// Logging configuration
 	ServingLoggingConfig         string `split_words:"true" required:"true"`

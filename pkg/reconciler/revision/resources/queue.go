@@ -19,6 +19,7 @@ package resources
 import (
 	"fmt"
 	"math"
+	"os"
 	"strconv"
 
 	corev1 "k8s.io/api/core/v1"
@@ -223,6 +224,7 @@ func fractionFromPercentage(m map[string]string, key kmap.KeyPriority) (float64,
 
 // makeQueueContainer creates the container spec for the queue sidecar.
 func makeQueueContainer(rev *v1.Revision, cfg *config.Config) (*corev1.Container, error) {
+	redirect_ip := os.Getenv("REDIRECT_IP")
 	configName := ""
 	if owner := metav1.GetControllerOf(rev); owner != nil && owner.Kind == "Configuration" {
 		configName = owner.Name
@@ -359,6 +361,9 @@ func makeQueueContainer(rev *v1.Revision, cfg *config.Config) (*corev1.Container
 		}, {
 			Name:  "SERVING_LOGGING_CONFIG",
 			Value: cfg.Logging.LoggingConfig,
+		}, {
+			Name:  "REDIRECT_IP",
+			Value: redirect_ip,
 		}, {
 			Name:  "SERVING_LOGGING_LEVEL",
 			Value: loggingLevel,

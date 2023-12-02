@@ -19,6 +19,7 @@ package revision
 import (
 	"context"
 	"fmt"
+	"os"
 
 	"go.uber.org/zap"
 
@@ -49,6 +50,8 @@ func (c *Reconciler) reconcileDeployment(ctx context.Context, rev *v1.Revision) 
 		// Deployment does not exist. Create it.
 		rev.Status.MarkResourcesAvailableUnknown(v1.ReasonDeploying, "")
 		rev.Status.MarkContainerHealthyUnknown(v1.ReasonDeploying, "")
+		logger.Info("About to createdeployment")
+		logger.Info("Redirect IP is " + os.Getenv("REDIRECT_IP"))
 		deployment, err = c.createDeployment(ctx, rev)
 		if err != nil {
 			return fmt.Errorf("failed to create deployment %q: %w", deploymentName, err)
