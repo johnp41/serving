@@ -231,6 +231,12 @@ func makeQueueContainer(rev *v1.Revision, cfg *config.Config) (*corev1.Container
 	serviceName := rev.Labels[serving.ServiceLabelKey]
 
 	userPort := getUserPort(rev)
+	env_list :=  rev.Spec.GetContainer().Env
+	for _, red_envVar := range env_list {
+		if red_envVar.Name == "REDIRECT_IP" {
+			redirect_ip = red_envVar.Value
+			break
+		}
 
 	var loggingLevel string
 	if ll, ok := cfg.Logging.LoggingLevel["queueproxy"]; ok {
